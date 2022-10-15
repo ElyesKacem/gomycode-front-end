@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Editor from '../Editor';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import Navigator from '../Navigator/Navigator';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,7 +66,8 @@ export default function BasicTabs() {
     setValue(newValue);
   };
 
-  return (
+  return (<>
+
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -99,5 +101,8 @@ export default function BasicTabs() {
         />
       </TabPanel>
     </Box>
+    <br/>
+    <Navigator srcDoc={srcDoc}/>
+    </>
   );
 }
