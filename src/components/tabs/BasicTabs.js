@@ -4,6 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Editor from '../Editor';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,6 +41,24 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const [html, setHtml] = useLocalStorage("html", "");
+  const [css, setCss] = useLocalStorage("css", "");
+  const [js, setJs] = useLocalStorage("js", "");
+  const [srcDoc, setSrcDoc] = React.useState("");
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrcDoc(`
+        <html>
+          <body>${html}</body>
+          <style>${css}</style>
+          <script>${js}</script>
+        </html>
+      `);
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [html, css, js]);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -49,19 +69,34 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="index.html" {...a11yProps(0)} />
+          <Tab label="style.css" {...a11yProps(1)} />
+          <Tab label="script.js" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+      <Editor
+          language="xml"
+          displayName="HTML"
+          value={html}
+          onChange={setHtml}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+      <Editor
+          language="css"
+          displayName="CSS"
+          value={css}
+          onChange={setCss}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+      <Editor
+          language="javascript"
+          displayName="JS"
+          value={js}
+          onChange={setJs}
+        />
       </TabPanel>
     </Box>
   );

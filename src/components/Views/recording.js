@@ -6,10 +6,9 @@ import BasicTabs from '../component/tabs/tabs'
 export const Recording = () => {
   return (
     <React.Fragment>
-      <Editor/>
-        <ButtonAppBar></ButtonAppBar>
+      {/* <Editor/> */}
+        <ButtonAppBar/>
         <BasicTabs>
-
         </BasicTabs>
     </React.Fragment>
   )

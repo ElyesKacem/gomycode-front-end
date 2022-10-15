@@ -23,17 +23,10 @@ export default function Editor(props) {
   }
 
   return (
-    <div className={`editor-container ${open ? '' : 'collapsed'}`}>
-      <div className="editor-title">
-        {displayName}
-        <button
-          type="button"
-          className="expand-collapse-btn"
-          onClick={() => setOpen(prevOpen => !prevOpen)}
-        >
-          <FontAwesomeIcon icon={open ? faCompressAlt : faExpandAlt} />
-        </button>
-      </div>
+    <div 
+    className={`editor-container ${open ? '' : 'collapsed'}`}
+    >
+      
       <ControlledEditor
         onBeforeChange={handleChange}
         value={value}
