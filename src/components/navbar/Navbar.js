@@ -9,7 +9,7 @@ import BasicBreadcrumbs from '../breadcrumbs/breadcumbs';
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:'#4f7995'}}>
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <BasicBreadcrumbs ></BasicBreadcrumbs>

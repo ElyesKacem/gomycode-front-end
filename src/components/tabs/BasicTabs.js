@@ -69,7 +69,7 @@ export default function BasicTabs() {
   return (<>
 
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider',backgroundColor:'#4a5667'}}>
+      <Box >
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab style={{color:"white" ,textTransform:"none"}} label="Index.html" {...a11yProps(0)} />
           <Tab style={{color:"white" ,textTransform:"none"}} label="Style.css" {...a11yProps(1)} />
