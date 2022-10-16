@@ -11,10 +11,12 @@ import { FlottedButton } from '../flottedButton/flottedButton';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import SquareIcon from '@mui/icons-material/Square';
 import { BottomDiv } from '../bottomDiv/bottomDiv';
+import StopWatch from '../stopwatch/Stopwatch';
+// import CountUp from 'react-countup';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
- 
+
 
   return (
     <div
@@ -47,7 +49,7 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
-  const [showButton, setShowButton] = React.useState(false);
+  const [showButton, setShowButton] = React.useState(true);
   const [buttonColor, setButtonColor] = React.useState('red');
   const [buttonTitle, setButtonTitle] = React.useState('Record');
   const [buttonIcon, setButtonIcon] = React.useState(<FiberManualRecordIcon/>);
@@ -55,6 +57,43 @@ export default function BasicTabs() {
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = React.useState("");
+  const [video, setVideo] = React.useState([]);
+
+  // time parametres
+
+  const [isActive, setIsActive] = React.useState(false);
+const [isPaused, setIsPaused] = React.useState(true);
+const [time, setTime] = React.useState(0);
+
+React.useEffect(() => {
+	let interval = null;
+
+	if (isActive && isPaused === false) {
+	interval = setInterval(() => {
+		setTime((time) => time + 10);
+	}, 10);
+	} else {
+	clearInterval(interval);
+	}
+	return () => {
+	clearInterval(interval);
+	};
+}, [isActive, isPaused]);
+
+const handleStart = () => {
+	setIsActive(true);
+	setIsPaused(false);
+};
+
+const handlePauseResume = () => {
+	setIsPaused(!isPaused);
+};
+
+const handleReset = () => {
+	setIsActive(false);
+	setTime(0);
+};
+
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -86,8 +125,12 @@ export default function BasicTabs() {
           <Tab style={{color:"white" ,textTransform:"none"}} label="Script.js" {...a11yProps(2)} />
         </Tabs>
       </Box>
+      {/* <StopWatch></StopWatch> */}
       <TabPanel value={value} index={0}>
       <Editor
+      time={time}
+      video={video}
+      setVideo={setVideo}
           language="xml"
           displayName="HTML"
           value={html}
@@ -96,6 +139,9 @@ export default function BasicTabs() {
       </TabPanel>
       <TabPanel value={value} index={1}>
       <Editor
+      time={time}
+      video={video}
+      setVideo={setVideo}
           language="css"
           displayName="CSS"
           value={css}
@@ -104,6 +150,9 @@ export default function BasicTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
       <Editor
+      time={time}
+      video={video}
+      setVideo={setVideo}
           language="javascript"
           displayName="JS"
           value={js}
@@ -114,22 +163,25 @@ export default function BasicTabs() {
     <br/>
     <Navigator srcDoc={srcDoc}/>
     {showButton && <FlottedButton color={buttonColor} title={buttonTitle} icon={buttonIcon}  onClick={(e)=>{
-      
+
       if(buttonTitle==='Record')
       {
         setButtonTitle('Stop');
         setButtonIcon(<SquareIcon/>);
+        setButtonColor('black');
         // here to start counting
+        handleStart();
       }
       else if(buttonTitle==="Stop")
       {
         setShowButton(false);
         // save video
       }
-      
-      
+
+
       }} />}
-      {!showButton && <BottomDiv>koko</BottomDiv>}
+      {!showButton && <BottomDiv></BottomDiv>}
+      
     </>
   );
 }

@@ -20,6 +20,15 @@ export default function Editor(props) {
 
   function handleChange(editor, data, value) {
     onChange(value)
+    var frame = {
+      fileName:language,
+      value:value,
+      time:props.time
+    }
+    var newVideo=props.video;
+    newVideo.push(frame);
+    props.setVideo(newVideo);
+    console.log(newVideo);
   }
 
   return (
