@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonAppBar from "./navbar/Navbar";
 import BasicTabs from "./tabs/BasicTabs";
 function App() {
   const [srcDoc, setSrcDoc] = useState("");
+useEffect(() => {
+  localStorage.clear();
+}, [])
 
   return (
     <>
