@@ -17,6 +17,8 @@ export default function Navigator({ srcDoc }) {
     // justifyContent: "center",
     border: "solid 1px #ddd",
     background: "white",
+    position:'absolute',
+    zIndex:3,
   };
 
   return (
