@@ -27,7 +27,7 @@ export default function Navigator({ srcDoc }) {
         minWidth={400}
         default={{
           x: 500,
-          y: 200,
+          y: 0,
           width: 400,
           height: 200,
           
