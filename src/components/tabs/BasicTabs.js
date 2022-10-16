@@ -206,7 +206,7 @@ const handleStop = () =>{
 
 
       }} />}
-      {!showButton && <BottomDiv videoDuration={videoDuration}></BottomDiv>}
+      {!showButton && <BottomDiv setHtml={setHtml} setCss={setCss} setJs={setJs} video={video} videoDuration={videoDuration}></BottomDiv>}
       
     </>
   );

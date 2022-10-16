@@ -3,7 +3,26 @@ import React, { useState } from 'react'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 
-export const BottomDiv = ({videoDuration}) => {
+export const BottomDiv = ({videoDuration,setHtml,setCss,setJs,video}) => {
+
+  const getLastChanges = (time,video) =>{
+    if(!video)
+      return null
+    else
+    {let result=video[1];
+      for (let i=0;i<video.length-1;i++){
+        if(time<video[i].time)
+          {break;}
+          else
+          {
+            result=video[i];
+          }
+      }
+      return result
+    }
+
+  }
+
   const [playPauseCurrentIcon, setPlayPauseCurrentIcon] = useState(<PlayArrowIcon/>);
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
@@ -11,8 +30,31 @@ export const BottomDiv = ({videoDuration}) => {
     let interval=null
     if(isPlaying){
       interval = setInterval(() => {
-        setTime((time) => time+1);
-      },  videoDuration/100);
+        setTime((time) => time+0.1);
+      },  videoDuration/1000);
+      let result=getLastChanges(time,video);
+      console.log(result);
+      if(result){
+        switch (result.fileName) {
+          case "xml":
+            
+            setHtml(result.value);
+            break;
+            case "css":
+              setCss(result.value);
+              break;
+              case "js":
+                setJs(result.value);
+              break;
+        
+          default:
+            break;
+        }
+      }
+
+
+        
+
 
     }
     else{
