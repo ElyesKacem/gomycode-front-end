@@ -7,9 +7,14 @@ import Box from '@mui/material/Box';
 import Editor from '../Editor';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import Navigator from '../Navigator/Navigator';
+import { FlottedButton } from '../flottedButton/flottedButton';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import SquareIcon from '@mui/icons-material/Square';
+import { BottomDiv } from '../bottomDiv/bottomDiv';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+ 
 
   return (
     <div
@@ -42,6 +47,10 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const [showButton, setShowButton] = React.useState(false);
+  const [buttonColor, setButtonColor] = React.useState('red');
+  const [buttonTitle, setButtonTitle] = React.useState('Record');
+  const [buttonIcon, setButtonIcon] = React.useState(<FiberManualRecordIcon/>);
   const [html, setHtml] = useLocalStorage("html", "");
   const [css, setCss] = useLocalStorage("css", "");
   const [js, setJs] = useLocalStorage("js", "");
@@ -61,6 +70,7 @@ export default function BasicTabs() {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
   const [value, setValue] = React.useState(0);
+  const [x, setx] = React.useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -103,6 +113,23 @@ export default function BasicTabs() {
     </Box>
     <br/>
     <Navigator srcDoc={srcDoc}/>
+    {showButton && <FlottedButton color={buttonColor} title={buttonTitle} icon={buttonIcon}  onClick={(e)=>{
+      
+      if(buttonTitle==='Record')
+      {
+        setButtonTitle('Stop');
+        setButtonIcon(<SquareIcon/>);
+        // here to start counting
+      }
+      else if(buttonTitle==="Stop")
+      {
+        setShowButton(false);
+        // save video
+      }
+      
+      
+      }} />}
+      {!showButton && <BottomDiv>koko</BottomDiv>}
     </>
   );
 }

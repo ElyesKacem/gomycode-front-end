@@ -20,7 +20,7 @@ export default function BasicBreadcrumbs() {
           color="inherit"
           href="/material-ui/getting-started/installation/"
         >
-          Leson 1
+          Lesson 1
         </Link>
         <Typography>Learn HTML CSS And Javascript </Typography>
       </Breadcrumbs>
