@@ -10,15 +10,12 @@ useEffect(() => {
 
   return (
     <>
-    {
-      /**
-       * <ButtonAppBar></ButtonAppBar>
+     <ButtonAppBar></ButtonAppBar>
        <BasicTabs  srcDoc={srcDoc}/>
-       * 
-       */
-    }
+       
     
-        <Login/>
+    
+       
 
       
     </>
