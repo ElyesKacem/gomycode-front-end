@@ -58,6 +58,7 @@ export default function BasicTabs() {
   const [js, setJs] = useLocalStorage("js", "");
   const [srcDoc, setSrcDoc] = React.useState("");
   const [video, setVideo] = React.useState([]);
+  const [videoDuration, setVideoDuration] = React.useState(0);
 
   // time parametres
 
@@ -94,6 +95,13 @@ const handleReset = () => {
 	setTime(0);
 };
 
+const handleStop = () =>{
+  setIsActive(false);
+  if(video[video.length-1]){
+
+    setVideoDuration(video[video.length-1].time);
+  }
+}
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -171,16 +179,34 @@ const handleReset = () => {
         setButtonColor('black');
         // here to start counting
         handleStart();
+        let initVideo=video;
+        initVideo.push({
+          fileName:'xml',
+          value:html,
+          time:0
+        })
+        initVideo.push({
+          fileName:'css',
+          value:css,
+          time:0
+        })
+        initVideo.push({
+          fileName:'javascript',
+          value:js,
+          time:0
+        })
+
       }
       else if(buttonTitle==="Stop")
       {
         setShowButton(false);
         // save video
+        handleStop();
       }
 
 
       }} />}
-      {!showButton && <BottomDiv></BottomDiv>}
+      {!showButton && <BottomDiv videoDuration={videoDuration}></BottomDiv>}
       
     </>
   );
