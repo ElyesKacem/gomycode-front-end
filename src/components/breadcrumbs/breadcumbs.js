@@ -13,16 +13,16 @@ export default function BasicBreadcrumbs() {
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs style={{color:'white'}} aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href="/">
-          MUI
+          Milstone 1
         </Link>
         <Link
           underline="hover"
           color="inherit"
           href="/material-ui/getting-started/installation/"
         >
-          Core
+          Leson 1
         </Link>
-        <Typography>Breadcrumbs</Typography>
+        <Typography>Learn HTML CSS And Javascript </Typography>
       </Breadcrumbs>
     </div>
   );

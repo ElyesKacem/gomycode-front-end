@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import BasicBreadcrumbs from '../breadcrumbs/breadcumbs';
+import Avatar from '@mui/material/Avatar';
 
 export default function ButtonAppBar() {
   return (
@@ -14,7 +15,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <BasicBreadcrumbs ></BasicBreadcrumbs>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </Box>
